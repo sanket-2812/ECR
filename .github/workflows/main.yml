@@ -21,7 +21,7 @@ jobs:
         uses: pier-digital/ecr-push@v1
         with:
           access_key_id: ${{ secrets.ACCESSKEY }}
-          secret_access_key: ${{ secrets.SECRETACCESSKEY }}
+          secret_access_key: ${{ secrets.SECRETKEY }}
           account_id: ${{ secrets.ACCOUNTID }}
           registry_ids: ${{ secrets.ACCOUNTID }} # optional
           assume_role: "" # optional
