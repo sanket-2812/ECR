@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Push to AWS ECR
+        uses: pier-digital/ecr-push@v1
+        with:
+          access_key_id: ${{ secrets.ACCESSKEY }}
+          secret_access_key: ${{ secrets.SECRETACCESSKEY }}
+          account_id: ${{ secrets.ACCOUNTID }}
+          registry_ids: ${{ secrets.ACCOUNTID }} # optional
+          assume_role: "" # optional
+          repo: my-ecr-repo-name
+          region: eu-north-1
+          create_repo: true # optional
+          set_repo_policy: false # optional
+          repo_policy_file: repo-policy.json # optional
+          tags: latest # optional
+          image_scanning_configuration: true # optional
+          dockerfile: Dockerfile # optional
+          # dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }} # optional
+          # dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }} # optional
+          extra_build_args: "" # optional
+          cache_from: "" # optional
+          path: . # optional
+          prebuild_script: "" # optional
