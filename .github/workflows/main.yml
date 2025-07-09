@@ -39,3 +39,14 @@ jobs:
           cache_from: "" # optional
           path: . # optional
           prebuild_script: "" # optional
+
+      - name: Deploy to ECS Fargate
+        uses: ZieglerLabs/ecs-fargate@v0.1
+        with:
+          tags: '[{"containerImage":"my-ecr-repo-name","tag":"latest"}]'
+          service: demo-service-7y6suy3x
+          cluster: willing-butterfly-shwu60
+          aws-access-key-id: ${{ secrets.ACCESSKEY }}
+          aws-secret-access-key: ${{ secrets.SECRETKEY }}
+          aws-region: eu-north-1
+          ecr: ${{ secrets.ACCOUNTID }}.dkr.ecr.eu-central-1.amazonaws.com
